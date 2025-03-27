@@ -1,42 +1,40 @@
-const { connectdb } = require('./db/db')
-const { errorhandlersMiddleware } = require('./middlewares/errorHandler')
-const { wrongRoute } = require('./middlewares/wrongRoute')
+require('dotenv').config()
 const express = require('express')
+const cookieParser = require('cookie-parser')
+const {connectdb} = require('./db/db')
+const {wrongRoute} = require('./middlewares/wrongRoute')
+const {errorhandlersMiddleware} = require('./middlewares/errorHandler')
+
 const app = express()
 
-
-//express middleware
+// middleware
+app.use(cookieParser(process.env.COOKIES_SECRET))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 
+// routes
+// app.get('/healthcheck', (req, res) => {
+// 	res.status(200).send('<h1> GOOD </h1>')
+// })
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-//errorhandlers
+// errors
 app.use(wrongRoute)
 app.use(errorhandlersMiddleware)
 
 
 const port = process.env.PORT || 5000
-
 const start = async () => {
 	try {
 		await connectdb(process.env.MONGO_URI)
-		await app.listen(port, ()=> console.log(`server running on port: ${port}`))
+		app.listen(port, () => {
+			console.log('server is running');
+		})
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
 }
 
