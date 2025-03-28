@@ -36,6 +36,7 @@ const getAllTasks = async (req, res) => {
   const pageNumber = Number(page) || 1;
   const limitNumber = Number(limit) || 5;
   const Skip = (pageNumber - 1) * limitNumber;
+  
   const TotalTasks = await Task.countDocuments(queryObject);
   const NumOfPages = Math.ceil(TotalTasks / limitNumber);
 
