@@ -20,6 +20,10 @@ const TaskSchema = mongoose.Schema({
 		enum: ['completed', 'incomplete'],
 		default: 'incomplete'
 	},
+	Deadline:{
+		type: Date,
+		default: Date.now() + 24 * 60 * 60 * 1000
+	},
 	CreatedBy:{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
@@ -28,5 +32,10 @@ const TaskSchema = mongoose.Schema({
 
 }, {timestamps: true})
 
-
+TaskSchema.pre("save", async function (next) {
+	if (this.isModified("Deadline")) {
+	  this.Deadline = await new Date(this.Deadline).toISOString();
+	}
+	next();
+  });
 module.exports = mongoose.model('Task', TaskSchema)

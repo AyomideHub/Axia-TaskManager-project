@@ -46,7 +46,7 @@ UserSchema.methods.getUserDocs = function () {
   };
 };
 
-UserSchema.methods.createCookies = function (req, res) {
+UserSchema.methods.createCookies = function (res) {
   const token = jwt.sign(
     { id: this._id, email: this.email, role: this.role },
     process.env.JWT_SECRET,

@@ -44,7 +44,7 @@ const login = async (req, res) => {
       throw new BadRequest("invalid credentials");
     }
 
-    await user.createCookies(req, res);
+    await user.createCookies(res);
 
     res.status(StatusCodes.OK).json({
       success: true,
