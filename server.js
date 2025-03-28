@@ -1,7 +1,10 @@
 require('dotenv').config()
+require('express-async-errors');
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const {connectdb} = require('./db/db')
+const AuthRoute = require('./routes/auth.route')
+const TaskRoute = require('./routes/tasks.route')
 const {wrongRoute} = require('./middlewares/wrongRoute')
 const {errorhandlersMiddleware} = require('./middlewares/errorHandler')
 
@@ -14,11 +17,8 @@ app.use(express.urlencoded({ extended: false }))
 
 
 // routes
-// app.get('/healthcheck', (req, res) => {
-// 	res.status(200).send('<h1> GOOD </h1>')
-// })
-
-
+app.use('/api/v1/auth', AuthRoute)
+app.use('/api/v1/tasks', TaskRoute)
 
 
 // errors

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const  {authenticateUser} = require('../middelwares/authentication')
+const  {authenticateUser} = require('../middlewares/authentication')
 const {createTask, getAllTasks, getSingleTask, updateTask, deleteTask} = require('../controllers/tasks.controller')
 
 

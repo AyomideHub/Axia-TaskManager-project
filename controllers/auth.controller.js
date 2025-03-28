@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+const { StatusCodes } = require("http-status-codes");
 const {
   BadRequest,
   NotFoundError,
@@ -43,7 +44,7 @@ const login = async (req, res) => {
       throw new BadRequest("invalid credentials");
     }
 
-    await user.createJWT(req, res);
+    await user.createCookies(req, res);
 
     res.status(StatusCodes.OK).json({
       success: true,

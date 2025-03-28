@@ -5,7 +5,7 @@ const TaskSchema = mongoose.Schema({
 		type: String,
 		required: [true, "please provide the name of the task"],
 		unique: true,
-		immutable: true
+		immutable: [true, "Can't change the name of the task"]
 	},
 	Description: {
 		type: String,
@@ -29,4 +29,4 @@ const TaskSchema = mongoose.Schema({
 }, {timestamps: true})
 
 
-module.exports = mongoose.Model('Task', TaskSchema)
+module.exports = mongoose.model('Task', TaskSchema)

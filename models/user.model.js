@@ -48,28 +48,25 @@ UserSchema.methods.getUserDocs = function () {
 
 UserSchema.methods.createCookies = function (req, res) {
   const token = jwt.sign(
-    { id: this._id},
+    { id: this._id, email: this.email, role: this.role },
     process.env.JWT_SECRET,
     {
       expiresIn: "7d",
     }
   );
 
-   res.cookie("token", token, {
+   return res.cookie("token", token, {
     signed: true,
     httpOnly: true,
     secure: process.env.NODE_MODE === 'production', // for dev mode
     sameSite: "strict",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
-
 };
 
 UserSchema.methods.comparePassword = async function (password) {
   const isMatch = await bcrypt.compare(password, this.password);
   return isMatch;
 };
-
-
 
 module.exports = mongoose.model("User", UserSchema);
