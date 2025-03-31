@@ -2,7 +2,7 @@ const mailTransport = require("../config/nodemailer.config");
 const welcomeMail = async (clientEmail) => {
   mailTransport.sendMail(
     {
-      from: "Task Manager App",
+      from: `"Task Manager App" ${process.env.GMAIL_USER}`,
       to: clientEmail,
       subject: "Welcome",
       html: "<h1>Task Manager</h1>\n<p>Resgistration successful. <b>Start creating tasks</b>",

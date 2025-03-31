@@ -21,7 +21,7 @@ const TaskSchema = mongoose.Schema({
 	},
 	Deadline:{
 		type: Date,
-		default: Date.now() + 24 * 60 * 60 * 1000
+		required: true,
 	},
 	reminderSent:{
 		type: Boolean,
