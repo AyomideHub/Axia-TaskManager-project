@@ -8,7 +8,7 @@ const {
 
 const register = async (req, res) => {
 
-  try {
+
 	const { fullname, email, password } = req.body;
 	if (!fullname || !email || !password) {
 	  throw new BadRequest("input cannot be empty");
@@ -25,14 +25,10 @@ const register = async (req, res) => {
       msg: "registration successful",
       data: user.getUserDocs(),
     });
-  } catch (error) {
-    console.log(error);
-    throw new ServerError("something went wrong, try again later");
-  }
 };
 
 const login = async (req, res) => {
-  try {
+
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
@@ -51,10 +47,6 @@ const login = async (req, res) => {
       msg: "login sucessfull",
       data: user.getUserDocs(),
     });
-  } catch (error) {
-    console.log(error);
-	throw new ServerError("something went wrong, try again later");
-  }
 };
 
 const logout = async (req, res) => {

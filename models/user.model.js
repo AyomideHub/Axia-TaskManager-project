@@ -43,12 +43,13 @@ UserSchema.pre("save", async function (next) {
 UserSchema.methods.getUserDocs = function () {
   return {
     ...this._doc,
+    password: undefined
   };
 };
 
 UserSchema.methods.createCookies = function (res) {
   const token = jwt.sign(
-    { id: this._id, email: this.email, role: this.role },
+    { id: this._id },
     process.env.JWT_SECRET,
     {
       expiresIn: "7d",

@@ -1,16 +1,28 @@
 require('dotenv').config()
-require('express-async-errors');
 const express = require('express')
-const cookieParser = require('cookie-parser')
+const app = express()
+const helmet = require('helmet')
+const cors = require('cors')
+const xss = require('xss-clean')
+const rateLimiter = require('express-rate-limit')
+require('express-async-errors');
 const {connectdb} = require('./db/db')
+const cookieParser = require('cookie-parser')
 const AuthRoute = require('./routes/auth.route')
 const TaskRoute = require('./routes/tasks.route')
 const {wrongRoute} = require('./middlewares/wrongRoute')
 const {errorhandlersMiddleware} = require('./middlewares/errorHandler')
 
-const app = express()
 
 // middleware
+app.set('trust proxy', 10)
+app.use(rateLimiter({
+windowMs: 15 * 60 * 1000, // 15 minutes
+max: 70, //limit each IP to 100 request per windowMs
+}))
+app.use(helmet())
+app.use(xss())
+app.use(cors())
 app.use(cookieParser(process.env.COOKIES_SECRET))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

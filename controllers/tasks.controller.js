@@ -19,17 +19,22 @@ const createTask = async (req, res) => {
 };
 
 const getAllTasks = async (req, res) => {
-  const { sort, order, page, limit, name, category } = req.query;
-  const queryObject = {};
+  const { sort, order, page, limit, name, category, status } = req.query;
+  const queryObject = {
+    CreatedBy: req.user.id,
+  };
   if (name) {
     queryObject.Name = { $regex: name, $options: 'i' }; // use to match pattern with the name passed in - from mongodb docs
   }
   if (category) {
     queryObject.Category = { $regex: category, $options: 'i' }; 
   }
+  if (status) {
+    queryObject.Status = status; 
+  }
 
  
-  const SortBy = sort || "Deadline";
+  const SortBy = sort || "createdAt";
   const OrderBy = order === "asc" ? 1 : -1;
   const sorting = {};
   sorting[SortBy] = OrderBy;

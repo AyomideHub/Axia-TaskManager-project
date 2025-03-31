@@ -22,7 +22,7 @@ const errorhandlersMiddleware = (err, req, res, next) => {
 
 	res.status(newError.StatusCode).json({message: newError.message})
 
-
+ 
 }
 
 module.exports = {errorhandlersMiddleware}

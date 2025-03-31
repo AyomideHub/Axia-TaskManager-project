@@ -4,7 +4,6 @@ const TaskSchema = mongoose.Schema({
 	Name: {
 		type: String,
 		required: [true, "please provide the name of the task"],
-		unique: true,
 		immutable: [true, "Can't change the name of the task"]
 	},
 	Description: {
