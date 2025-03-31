@@ -23,6 +23,10 @@ const TaskSchema = mongoose.Schema({
 		type: Date,
 		default: Date.now() + 24 * 60 * 60 * 1000
 	},
+	reminderSent:{
+		type: Boolean,
+		default: false
+	},
 	CreatedBy:{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',

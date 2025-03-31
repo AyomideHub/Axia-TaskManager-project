@@ -17,6 +17,8 @@ User-specific task management
 MONGO_URI=
 JWT_SECRET=
 COOKIES_SECRET=
+GMAIL_USER=
+GMAIL_PASS= 'create a google app password'
 
 ```
 

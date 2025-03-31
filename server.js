@@ -12,7 +12,9 @@ const AuthRoute = require('./routes/auth.route')
 const TaskRoute = require('./routes/tasks.route')
 const {wrongRoute} = require('./middlewares/wrongRoute')
 const {errorhandlersMiddleware} = require('./middlewares/errorHandler')
-
+const { deadlineRemainder } = require('./utils/CronJobs')
+const Task = require('./models/tasks.model')
+const User = require('./models/user.model')
 
 // middleware
 app.set('trust proxy', 10)
@@ -38,6 +40,11 @@ app.use(wrongRoute)
 app.use(errorhandlersMiddleware)
 
 
+//
+deadlineRemainder(Task, User)
+
+
+//server and connect to db 
 const port = process.env.PORT || 5000
 const start = async () => {
 	try {
@@ -49,5 +56,4 @@ const start = async () => {
 		console.log(error);
 	}
 }
-
 start()

@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 const { StatusCodes } = require("http-status-codes");
 const { BadRequest, NotFoundError, ServerError } = require("../errors");
-const sendMail = require("../utils/welcomeEmail");
+const {welcomeMail} = require("../utils/Email");
 
 const register = async (req, res, next) => {
   const { fullname, email, password } = req.body;
@@ -10,7 +10,7 @@ const register = async (req, res, next) => {
   }
 
   try {
-    await sendMail(email);
+    await welcomeMail(email);
     const user = await User.create({
       fullname,
       email,
