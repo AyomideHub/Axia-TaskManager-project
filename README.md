@@ -33,3 +33,59 @@ npm install
 npm run dev
 
 ```
+
+## End Point ##
+1. Register
+```
+POST /api/v1/auth/register
+
+```
+2. Login
+```
+POST /api/v1/auth/login
+
+```
+3. Logout
+```
+POST /api/v1/auth/login
+
+```
+4. Create Task
+```
+POST /api/v1/tasks
+
+```
+5. Get A Task
+```
+GET /api/v1/tasks/:id
+
+```
+6. Update A Task
+```
+PATCH /api/v1/tasks/:id
+
+```
+7. Delete A Task
+```
+DELETE /api/v1/tasks/:id
+
+```
+8. Get All Tasks
+```
+GET /api/v1/tasks
+
+```
+9. Queries
+```
+GET /api/v1/tasks?
+
+options:
+status - completed or incomplete,
+name,
+category,
+sort - Deadline, Category, createdAt
+order - asc, dsc
+page,
+limit,
+
+```
