@@ -40,7 +40,7 @@ app.use(wrongRoute)
 app.use(errorhandlersMiddleware)
 
 
-//
+//cronJOb to reamin users when the deadline to a task is approaching and send an email
 deadlineRemainder(Task, User)
 
 
