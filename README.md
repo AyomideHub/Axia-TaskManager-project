@@ -38,13 +38,28 @@ npm run dev
 1. Register
 ```
 POST /api/v1/auth/register
-
 ```
+```json
+{
+    "fullname": " ",
+    "email": " ",
+    "password": " "
+   
+}
+```
+
 2. Login
 ```
 POST /api/v1/auth/login
-
 ```
+```json
+{
+    "email": " ",
+    "password": " "
+   
+}
+```
+
 3. Logout
 ```
 POST /api/v1/auth/login
@@ -53,8 +68,18 @@ POST /api/v1/auth/login
 4. Create Task
 ```
 POST /api/v1/tasks
-
 ```
+```json
+{
+    "Name": " ",
+    "Description": " ",
+    "Status": " ",
+	"Category": " ",
+	"Deadline": " "
+   
+}
+```
+
 5. Get A Task
 ```
 GET /api/v1/tasks/:id
